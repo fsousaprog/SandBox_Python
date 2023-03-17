@@ -18,10 +18,6 @@ class Animal(ABC):
     def make_sound(self):
         pass
 
-    # Describes the info of the animal
-    def describe(self):
-        messagebox.showinfo(self.name, self.color)
-
 
 # Underwater animal
 class Fish(Animal):
