@@ -8,6 +8,7 @@ class Animal(ABC):
     color: str = ""
 
     # Constructor with necessary attributes
+    # ToDo: the __init__ is not the constructor. The __new__ method that is the constructor.
     def __init__(self, name: str, color: str):
         self.name = name
         self.color = color

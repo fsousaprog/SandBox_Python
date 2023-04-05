@@ -1,3 +1,5 @@
+# ToDo: incluir os testes unitários. Pode usar ChatGPT pra fazer.
+
 from typing import Optional
 
 from fastapi import FastAPI, Path, HTTPException
@@ -24,6 +26,7 @@ def get_animals():
     return {"Animals": animals}
 
 
+#ToDo: este endpoint contém um erro que impede o funcionamento do app. Corrigir.
 @app.post("/fish/{animal_id}/{character}")
 def create_fish(animal_id: int, character: str = Path(None, description="Character to create name")):
     if animal_id in animals:

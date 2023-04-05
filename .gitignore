@@ -1,1 +1,3 @@
 .idea/*
+/animal_generator/.venv/
+/animal_generator/poetry.lock
