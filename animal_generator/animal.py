@@ -8,11 +8,10 @@ class Animal(ABC):
     color: str = ""
 
     # Constructor with necessary attributes
-    # ToDo: the __init__ is not the constructor. The __new__ method that is the constructor.
-    def __init__(self, name: str, color: str):
-        self.name = name
-        self.color = color
-        super().__init__()
+    def __new__(cls, name: str, color: str):
+        cls.name = name
+        cls.color = color
+        return super(Animal, cls).__new__(cls)
 
     # Each instance needs to implement its own
     @abstractmethod

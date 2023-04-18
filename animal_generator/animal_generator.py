@@ -5,12 +5,11 @@ import animal
 names = ['Muffin', 'Jerry', 'Cake', 'George VII', 'Spartacus', 'Leopold', 'Little Dean', 'Cookie', 'Xavier', 'William',
          'Zeus', 'Ygor', 'Biscuit', 'Ferdinand', 'Hugg']
 colors = ['blue', 'green', 'brown', 'orange', 'black', 'white', 'striped']
-name, color, new_animal = '', '', animal
+name, color = '', ''
 
 
 # Creates and underwater animal
 def create_fish(character=None):
-    global new_animal
     define_animal(character)
     new_animal = animal.Fish(name=name, color=color)
     new_animal.make_sound()
@@ -19,7 +18,6 @@ def create_fish(character=None):
 
 # Creates a flying animal
 def create_bird(character=None):
-    global new_animal
     define_animal(character)
     new_animal = animal.Bird(name=name, color=color)
     new_animal.make_sound()
@@ -28,8 +26,6 @@ def create_bird(character=None):
 
 # Creates a ground animal
 def create_terrestrial(character=None):
-    global new_animal
-    global name
     define_animal(character)
     new_animal = animal.Terrestrial(name=name, color=color)
     new_animal.make_sound()
