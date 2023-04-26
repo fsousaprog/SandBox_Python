@@ -10,6 +10,8 @@ name, color = '', ''
 
 # Creates and underwater animal
 def create_fish(character=None):
+    new_animal = animal.Animal
+    new_animal(name="dog", color="black")
     define_animal(character)
     new_animal = animal.Fish(name=name, color=color)
     new_animal.make_sound()
