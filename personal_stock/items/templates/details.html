@@ -1,0 +1,15 @@
+{% extends "master.html" %}
+
+{% block title %}
+Details about {{ my_item.name }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ my_item.name }}</h1>
+
+<p>Quantity: {{ my_item.quantity }}</p>
+<p>Average Price: {{ my_item.avg_price }}</p>
+
+<p>Back to <a href="/items">Items</a></p>
+
+{% endblock %}

@@ -14,7 +14,7 @@ def create_fish(character=None):
     new_animal(name="dog", color="black")
     define_animal(character)
     new_animal = animal.Fish(name=name, color=color)
-    new_animal.make_sound()
+    # new_animal.make_sound()
     return new_animal
 
 
@@ -22,7 +22,7 @@ def create_fish(character=None):
 def create_bird(character=None):
     define_animal(character)
     new_animal = animal.Bird(name=name, color=color)
-    new_animal.make_sound()
+    # new_animal.make_sound()
     return new_animal
 
 
@@ -30,7 +30,7 @@ def create_bird(character=None):
 def create_terrestrial(character=None):
     define_animal(character)
     new_animal = animal.Terrestrial(name=name, color=color)
-    new_animal.make_sound()
+    # new_animal.make_sound()
     return new_animal
 
 

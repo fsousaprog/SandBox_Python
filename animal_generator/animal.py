@@ -1,35 +1,51 @@
 from abc import ABC, abstractmethod
 from tkinter import messagebox
 
-
+"""
 # Base class for Animals with necessary attributes and abstract methods
+"""
+
+
 class Animal(ABC):
     name: str = ""
     color: str = ""
 
-    #ToDo Test this code and check the differences between the structures
+    """
+    Animal class instance creator
+    :param name: Name of the animal
+    :param color: Color of the animal
+    """
+
     def __new__(cls, name: str, color: str):
-        """
-        It's better to include the docstrings like this
-        :param name:
-        :param color:
-        """
         cls.name = name
         cls.color = color
         return super(Animal, cls).__new__(cls)
 
-    #ToDo include docstrings
+    """
+    Animal initializer method
+    :param name: Name of the animal
+    :param color: Color of the animal
+    """
+
     def __init__(self, name: str, color: str):
-        super(Animal, self).__init__(self)
         self.name = name
         self.color = color
 
-    #ToDo Include docstrings
+    """
+    Animal calling method as a function
+    :param name: Name of the animal
+    :param color: Color of the animal
+    """
+
     def __call__(self, name: str, color: str):
         self.name = name
         self.color = color
 
-    #ToDo Include docstrings
+    """
+    Abstract method that's required when implementing a new animal.
+    It's supposed to make a visual notification specific for the type of animal.
+    """
+
     @abstractmethod
     def make_sound(self):
         pass
