@@ -1,5 +1,6 @@
 # Python comprehensions
 import time
+from collections import defaultdict
 
 if __name__ == "__main__":
     ext_str = lambda x: x[:2]
@@ -35,20 +36,27 @@ if __name__ == "__main__":
     print(aves_c_2)
 
     # Tuplas
+    # DONE: Criar um gerador que tenha o mesmo comportamento que a compreehension
+    start_time = time.time()
 
-    # TODO: Criar um gerador que tenha o mesmo comportamento que a compreehension
-    aves = []
-    def aves_generator(animais):
+    def aves_generator():
         for animal in animais:
             if animal[1] == "Ave":
                 yield animal[0]
 
-    ave_g = aves_generator(animais)
-    print("Normal", f"{ave_g}")
 
+    ave_g = aves_generator()
+    for ave in ave_g:
+        print("Normal", f"{ave}")
+    end_time = time.time()
+    print(f"Normal duration:{end_time - start_time}")
+
+    start_time = time.time()
     aves_c = (animal[0] for animal in animais if animal[1] == "Ave")
     for ave in aves_c:
         print("Comprehension", f"{ave}")
+    end_time = time.time()
+    print(f"Comprehension duration:{end_time - start_time}")
 
     # Dicionário
     aves_dict = {
@@ -69,7 +77,10 @@ if __name__ == "__main__":
     print(aves_dict)
     animals_list = [aves_dict, mamals_dict, reptiles_dict]
 
-    # TODO: transformar a lista de tuplas em um dicionário usando compreehensions
+    # DONE: transformar a lista de tuplas em um dicionário usando compreehensions
+    animals_dict = defaultdict(list)
+    [animals_dict[tipo].append(nome) for nome, tipo in animais if nome not in animals_dict[tipo]]
+    print(animals_dict)
 
     # Set
     aves_set = {animal[0] for animal in animais if animal[1] == "Ave"}
