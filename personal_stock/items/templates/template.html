@@ -2,11 +2,24 @@
 <html>
 <body>
 
-{% for x in fruits %}
-<h1>{{ x }}</h1>
-{% endfor %}
+{% with type="Fruit" %}
+    {% for x in fruits %}
+        {% if "a" in x or "A" in x %}
+            <h1>Contains a: {{ x }}</h1>
+        {% elif "e" in x or "E" in x %}
+            <h1>Contains e: {{ x }}</h1>
+        {% else %}
+            <h2>{{type}}: {{x}}</h2>
+        {% endif %}
+    {% empty %}
+        <h2>No fruits in the list</h2>
+    {% endfor %}
+{% endwith %}
 
-<p>In views.py you can see what the fruits variable looks like.</p>
+{% comment "Comment message here" %}
+    <p>In views.py you can see what the fruits variable looks like.</p>
+{% endcomment %}
 
+{% include "footer.html" with name="Felipe" %}
 </body>
 </html>
