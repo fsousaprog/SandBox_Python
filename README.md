@@ -26,3 +26,7 @@ To be able to access */admin* to manage the models data, type the following
 command into the console: **python manage.py createsuperuser**, then type in
 the username, fake email and password.
 
+
+# spend_reporter
+
+TODO

@@ -2,4 +2,5 @@
 /myworld/*
 /animal_generator/.venv/
 /animal_generator/poetry.lock
+/spend_reporter/resources/*
 **/__pycache__/*
