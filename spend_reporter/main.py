@@ -2,11 +2,18 @@ from pathlib import Path
 import fitz
 
 RESOURCES = Path("spend_reporter/resources/")
+UNCATEGORIZED = "Uncategorized"
+TOTAL = "Total"
 CATEGORIES = {
-    "Market": ["PINGO DOCE", "CONTINENTE", "EL CORTE", "MINIPREÇO", "LIDL", "ALDI", "INTERMARCHÉ", "AUCHAN", "MERCADONA"],
-    "CTW": ["CRITICAL"],
-    "Clothes": ["ZARA", "LEFTIES", "PRIMARK", "BERSHKA", "PULL&BEAR", "STRADIVARIUS", "TIFFOSI", "SPORT ZONE", "DECATHLON", "SEASIDE"],
-    "Transport": ["BOLT", "UBER"]
+    "Market": ["PINGO DOCE", "CONTINENTE", "EL CORTE", "NORMALAS", "MINIPREÇO", "LIDL", "ALDI", "INTERMARCHÉ", "AUCHAN", "MERCADONA", "MARKET", "SUPERMERCADO", "SUPERMARKET", "CARREFOUR", "HYPERMERCADO", "HYPERMARKET"],
+    "CTW": ["CRITICAL", "CRISTAL"],
+    "Clothes": ["ZARA", "LEFTIES", "PRIMARK", "BERSHKA", "PULL&BEAR", "STRADIVARIUS", "TIFFOSI", "SPORT ZONE", "DECATHLON", "SEASIDE", "SKETCHERS", "VANS", "NIKE", "ADIDAS"],
+    "Transport": ["TALLINN", "OLAIAS LISBOA", "TRANSPORT"],
+    "Food": ["TGTG", "UBER EATS", "GLOVO", "VIIMSI", "MCDONALDS", "BK", "H3", "PIZZA", "MONTADITOS", "KFC", "SUBWAY", "DOMINOS", "BURGER", "BURGUER", "PASTEL", "PASTEIS", "CAFE", "LINDT"],
+    "Health": ["PHARMACY", "FARMACIA", "WELLS", "HOSPITAL", "CLINIC", "DENTIST"],
+    "Sports": ["LEMON FIT", "GYM", "FITNESS"],
+    "Online Shopping": ["AMAZON", "TEMU", "ALIBABA", "EBAY", "WISH", "ALIEXPRESS", "FNAC"],
+    "Travel": ["FLIXBUS", "ALSA", "RENTAL", "CAR", "FLIGHT", "HOTEL", "HOSTEL", "AIRBNB", "BOOKING", "APARTMENT"]
 }
 
 # Scrap PDF to make list of lines
@@ -22,7 +29,7 @@ def extract_lines_from_pdf(pdf):
 def group_lines(lines):
     grouped_lines = {}
     for i, line in enumerate(lines):
-        if line.startswith("COMPRA") and i + 1 < len(lines):
+        if (line.startswith("COMPRA") or line.startswith("MBW")) and i + 1 < len(lines):
             if line not in grouped_lines:
                 grouped_lines[line] = []
             grouped_lines[line].append(lines[i + 1].replace(" ", ""))
@@ -37,6 +44,8 @@ def sum_values(grouped_lines):
 # Categorize the lines based on keywords
 def categorize_lines(grouped_lines):
     category_totals = {}
+    category_totals[TOTAL] = 0
+    category_totals[UNCATEGORIZED] = 0
     uncategorized_lines = []
 
     for description, value in grouped_lines.items():
@@ -51,17 +60,20 @@ def categorize_lines(grouped_lines):
                 break
         
         if not matched:
+            category_totals[UNCATEGORIZED] += value
             uncategorized_lines.append((description, value))
+
+        category_totals[TOTAL] += value
 
     return dict(category_totals), dict(uncategorized_lines)
 
 # Present the data
 def present_data(category_totals, uncategorized_lines):
-    print("\nCategory Totals:")
+    print("\nReport:")
     for category, total in category_totals.items():
         print(f"{category}: {total:.2f}")
 
-    print("\nUncategorized Lines:")
+    print("\nUncategorized Lines: ")
     for description, value in uncategorized_lines.items():
         print(f"{description}: {value:.2f}")
 
@@ -78,9 +90,9 @@ def process_pdf(pdf_file):
 
 
 # Process all PDF files in the resources directory
-# for pdf_file in RESOURCES.glob("*.pdf"):
-#     process_pdf(pdf_file)
+for pdf_file in RESOURCES.glob("*.pdf"):
+    process_pdf(pdf_file)
 
-process_pdf(RESOURCES / "2025-03_Card.pdf")
+# process_pdf(RESOURCES / "2025-03_Card.pdf")
 
 # TODO: Create a chart with the data
